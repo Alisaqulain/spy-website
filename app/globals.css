@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-primary-dark;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent-green text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#7FA03D] hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-accent-green border-2 border-accent-green px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-accent-green hover:text-white hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-primary-dark border-2 border-primary-dark px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary-dark hover:text-white;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 px-4 md:px-8 lg:px-16;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .gradient-overlay {
+    @apply absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-primary-dark/70;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

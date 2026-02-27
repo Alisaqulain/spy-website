@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply bg-background text-primary-dark;
+    @apply bg-background text-primary-navy;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -18,19 +18,19 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-accent-green text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#7FA03D] hover:shadow-lg hover:scale-105 active:scale-95;
+    @apply bg-accent-gold text-primary-navy px-6 py-3 rounded-2xl font-medium transition-all duration-300 hover:bg-amber-500 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply bg-white text-accent-green border-2 border-accent-green px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-accent-green hover:text-white hover:shadow-lg;
+    @apply bg-white text-primary-navy border-2 border-primary-navy px-6 py-3 rounded-2xl font-medium transition-all duration-300 hover:bg-primary-navy hover:text-white hover:shadow-lg;
   }
 
   .btn-outline {
-    @apply bg-transparent text-primary-dark border-2 border-primary-dark px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary-dark hover:text-white;
+    @apply bg-transparent text-white border-2 border-white px-6 py-3 rounded-2xl font-medium transition-all duration-300 hover:bg-white hover:text-primary-navy;
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6;
+    @apply bg-white rounded-2xl shadow-soft hover:shadow-card-hover transition-all duration-300 p-6;
   }
 
   .section-padding {
@@ -42,7 +42,7 @@
   }
 
   .gradient-overlay {
-    @apply absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-primary-dark/70;
+    @apply absolute inset-0 bg-gradient-to-r from-primary-navy/90 to-primary-navy/70;
   }
 }
 
@@ -50,4 +50,33 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Hero background slow zoom (Ken Burns effect) */
+@keyframes hero-zoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.animate-hero-zoom {
+  animation: hero-zoom 18s ease-in-out infinite alternate;
+}
+
+/* Section background image parallax-style */
+.section-bg-image {
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+}
+@media (min-width: 1024px) {
+  .section-bg-image {
+    background-attachment: fixed;
+  }
+}
+
+/* Swiper overrides for premium look */
+.swiper-pagination-bullet {
+  @apply bg-white/60 w-3 h-3 transition-all duration-300;
+}
+.swiper-pagination-bullet-active {
+  @apply bg-accent-gold w-8 rounded-full;
 }

@@ -10,20 +10,30 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          dark: "#4D5262",
-          DEFAULT: "#4D5262",
+          navy: "#0B1F3A",
+          dark: "#0B1F3A",
+          DEFAULT: "#0B1F3A",
         },
         accent: {
-          green: "#90B94A",
-          DEFAULT: "#90B94A",
+          gold: "#D4AF37",
+          DEFAULT: "#D4AF37",
         },
         background: {
-          light: "#F8F9FA",
+          light: "#F5F6F8",
           DEFAULT: "#FFFFFF",
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
+      borderRadius: {
+        "2xl": "1rem",
+        "3xl": "1.5rem",
+      },
+      boxShadow: {
+        soft: "0 4px 20px rgba(11, 31, 58, 0.08)",
+        card: "0 8px 30px rgba(11, 31, 58, 0.12)",
+        "card-hover": "0 16px 48px rgba(11, 31, 58, 0.16)",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-in-out",

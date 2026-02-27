@@ -1,217 +1,144 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Calendar, ArrowLeft, Tag, Share2 } from "lucide-react";
 import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowRight, Calendar, Tag } from "lucide-react";
+import PageHero from "@/components/PageHero";
+import { blogPosts, getPostBySlug } from "@/lib/blog-data";
 
-const blogPosts: Record<string, {
-  title: string;
-  content: string;
-  category: string;
-  date: string;
-  excerpt: string;
-}> = {
-  "understanding-group-health-insurance-benefits": {
-    title: "Understanding Group Health Insurance Benefits",
-    category: "Corporate Insurance",
-    date: "2024-01-15",
-    excerpt: "Learn how group health insurance can benefit your employees and your business.",
-    content: `
-      Group health insurance is one of the most valuable benefits you can offer your employees. 
-      Not only does it help attract and retain top talent, but it also provides financial protection 
-      for your workforce while potentially reducing your business's tax burden.
+const postContent: Record<string, string> = {
+  "corporate-risk-transfer": `
+Corporate risk transfer is the process of shifting financial exposure from the business to insurers or other counterparties. Strategies include:
 
-      ## What is Group Health Insurance?
+**Insurance programmes** – Property, liability, business interruption, and specialty lines are designed to align with your risk appetite and retention. Working with a broker helps ensure no gaps or overlaps.
 
-      Group health insurance is a type of health insurance plan that covers a group of people, 
-      typically employees of a company. These plans are usually more affordable than individual 
-      health insurance policies because the risk is spread across a larger pool of people.
+**Captives and alternative risk transfer** – Larger organisations may use captives or structured solutions for cost efficiency and customisation. We advise on feasibility and implementation.
 
-      ## Key Benefits for Employers
+**Contractual transfer** – In contracts with suppliers, contractors, or partners, risk can be allocated via indemnities and insurance requirements. We help draft and review such clauses.
 
-      ### 1. Attract and Retain Talent
-      In today's competitive job market, comprehensive health benefits can be a deciding factor 
-      for potential employees. Offering group health insurance shows that you value your employees' 
-      well-being and can help you stand out from competitors.
+At SPY Insurance Brokers, we help corporates design risk transfer strategies that balance protection, cost, and compliance. Contact us to discuss your programme.
+  `,
+  "health-coverage-families": `
+Comprehensive health coverage gives families access to quality healthcare without facing financial stress during medical emergencies.
 
-      ### 2. Tax Benefits
-      Premiums paid for group health insurance are typically tax-deductible as a business expense. 
-      This can provide significant tax savings for your company.
+**Family floater plans** – One policy covers the entire family with a shared sum insured. They are often more economical than individual policies and simplify renewal and claims.
 
-      ### 3. Improved Employee Productivity
-      Healthy employees are more productive employees. When your workforce has access to quality 
-      healthcare, they're more likely to stay healthy and miss fewer work days.
+**What to look for** – Adequate sum insured, wide hospital network, coverage for pre-existing conditions (after waiting period), and optional maternity or critical illness riders.
 
-      ## Benefits for Employees
+**Tax benefits** – Premiums paid for health insurance qualify for deduction under Section 80D of the Income Tax Act.
 
-      ### 1. Lower Premiums
-      Group plans typically offer lower premiums compared to individual health insurance policies 
-      because the cost is shared among all members of the group.
+We help families compare plans and choose coverage that fits their needs and budget. Get in touch for a personalised recommendation.
+  `,
+  "industry-insurance-leaders": `
+Industry-specific insurance addresses the unique risks of each sector—from manufacturing and power to logistics and technology.
 
-      ### 2. Better Coverage
-      Group health insurance plans often provide more comprehensive coverage than individual plans, 
-      including preventive care, prescription drugs, and mental health services.
+**Property and business interruption** – Tailored to your assets, supply chain, and revenue streams. Limits and deductibles should reflect your exposure.
 
-      ### 3. No Medical Underwriting
-      Most group health insurance plans don't require individual medical underwriting, meaning 
-      employees with pre-existing conditions can still get coverage.
+**Liability** – Public, product, and professional liability vary by industry. Regulatory and contractual requirements often dictate minimum cover.
 
-      ## Choosing the Right Plan
+**Specialty lines** – Cyber, marine cargo, erection all risks, and other specialty covers are designed for specific operational risks.
 
-      When selecting a group health insurance plan, consider:
-      - Your budget and the premium you can afford
-      - The needs of your employees
-      - Network coverage and preferred providers
-      - Additional benefits like dental and vision coverage
+Leaders who align their insurance programme with their industry’s risk profile are better prepared for disruptions and stakeholder expectations. Our industry practice helps you design and place the right programme.
+  `,
+  "claims-management-tips": `
+Efficient claims management improves outcomes and reduces stress for corporates.
 
-      At SPY Insurance, we help businesses find the right group health insurance plan that balances 
-      comprehensive coverage with affordability. Contact us today to learn more about your options.
-    `,
-  },
-  "10-essential-tips-choosing-motor-insurance": {
-    title: "10 Essential Tips for Choosing Motor Insurance",
-    category: "Retail Insurance",
-    date: "2024-01-10",
-    excerpt: "Make an informed decision when selecting motor insurance.",
-    content: `
-      Choosing the right motor insurance can be overwhelming with so many options available. 
-      Here are 10 essential tips to help you make an informed decision.
+**Early intimation** – Notify the insurer (or your broker) as soon as a loss is known. Delays can affect admissibility.
 
-      ## 1. Understand Your Coverage Needs
+**Documentation** – Maintain records: photos, reports, invoices, and correspondence. Your broker can help compile claim files.
 
-      Before purchasing motor insurance, assess your needs. Do you need comprehensive coverage 
-      or is third-party liability sufficient? Consider factors like your vehicle's value, 
-      your driving habits, and your financial situation.
+**Single point of contact** – Designate a relationship manager or claims team so the insurer has one channel for communication.
 
-      ## 2. Compare Multiple Quotes
+**Follow-up** – Regular follow-up with the insurer and surveyors keeps the claim on track. We do this on behalf of our clients.
 
-      Don't settle for the first quote you receive. Compare policies from multiple insurers 
-      to find the best coverage at the most competitive price. Use online comparison tools 
-      or consult with an insurance broker.
+Our Claims Assistance Team supports you from intimation to settlement. Contact us to learn how we can help.
+  `,
+  "travel-insurance-guide": `
+Frequent travellers should consider travel insurance for every trip—domestic or international.
 
-      ## 3. Check the Insurer's Claim Settlement Ratio
+**Medical cover** – Hospitalisation and evacuation abroad can be very expensive. Travel insurance provides emergency medical cover and 24/7 assistance.
 
-      The claim settlement ratio indicates how efficiently an insurer processes claims. 
-      Choose an insurer with a high claim settlement ratio for faster claim processing.
+**Trip cancellation and delay** – Reimbursement for non-refundable bookings and extra expenses due to delay or cancellation (as per policy terms).
 
-      ## 4. Look for Add-on Covers
+**Baggage** – Loss, delay, or damage to baggage can be covered. Keep receipts and airline reports for claims.
 
-      Consider add-on covers like zero depreciation, engine protection, roadside assistance, 
-      and personal accident cover. These can provide additional protection for a small extra cost.
+**Multi-trip plans** – If you travel often, an annual multi-trip policy may be more convenient and cost-effective.
 
-      ## 5. Review the Network of Garages
-
-      Check if the insurer has a wide network of cashless garages near you. This ensures 
-      convenient claim settlement without out-of-pocket expenses.
-
-      ## 6. Understand Exclusions
-
-      Read the policy document carefully to understand what's not covered. Common exclusions 
-      include damage due to war, nuclear risks, and driving under influence.
-
-      ## 7. Consider No Claim Bonus
-
-      A No Claim Bonus (NCB) is a discount you receive for not making any claims during 
-      the policy period. This can significantly reduce your premium over time.
-
-      ## 8. Check Online Reviews
-
-      Research the insurer's reputation by reading customer reviews and ratings. This can 
-      give you insights into their service quality and claim handling process.
-
-      ## 9. Maintain Good Driving Record
-
-      A clean driving record can help you get better rates. Avoid traffic violations and 
-      accidents to maintain a good insurance history.
-
-      ## 10. Review Annually
-
-      Your insurance needs may change over time. Review your policy annually and make 
-      adjustments as needed. You might find better deals or need additional coverage.
-
-      At SPY Insurance, we help you navigate the complex world of motor insurance and 
-      find the best policy for your needs. Contact us for expert guidance.
-    `,
-  },
+We offer single-trip and multi-trip plans from leading insurers. Share your travel plans and we’ll recommend the right cover.
+  `,
 };
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = blogPosts[params.slug];
-  
-  if (!post) {
-    return {
-      title: "Post Not Found",
-    };
-  }
+export async function generateStaticParams() {
+  return blogPosts.map((p) => ({ slug: p.slug }));
+}
 
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = getPostBySlug(params.slug);
+  if (!post) return { title: "Blog | SPY Insurance Brokers" };
   return {
-    title: `${post.title} | SPY Insurance Blog`,
+    title: `${post.title} | Blog`,
     description: post.excerpt,
   };
 }
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts[params.slug];
+  const post = getPostBySlug(params.slug);
+  if (!post) notFound();
 
-  if (!post) {
-    notFound();
-  }
+  const content = postContent[post.slug] || post.excerpt;
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-background-light via-white to-background-light">
+      <section className="pt-28 pb-16 md:pt-32 md:pb-20 bg-white">
         <div className="container-custom">
-          <Link
-            href="/blog"
-            className="inline-flex items-center space-x-2 text-primary-dark hover:text-accent-green mb-8 transition-colors"
-          >
+          <Link href="/blog" className="inline-flex items-center gap-2 text-primary-navy hover:text-accent-gold mb-8 transition-colors">
             <ArrowLeft className="w-5 h-5" />
-            <span>Back to Blog</span>
+            Back to Blog
           </Link>
           <div className="max-w-3xl">
-            <div className="flex items-center space-x-4 mb-4 text-sm">
-              <span className="flex items-center space-x-1 text-accent-green">
+            <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
+              <span className="flex items-center gap-1 text-accent-gold font-medium">
                 <Tag className="w-4 h-4" />
-                <span>{post.category}</span>
+                {post.category}
               </span>
-              <span className="flex items-center space-x-1 text-primary-dark/60">
+              <span className="flex items-center gap-1 text-primary-navy/60">
                 <Calendar className="w-4 h-4" />
-                <span>{new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+                {new Date(post.date).toLocaleDateString("en-IN", { month: "long", day: "numeric", year: "numeric" })}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
-              {post.title}
-            </h1>
-            <p className="text-xl text-primary-dark/70">
-              {post.excerpt}
-            </p>
+            <h1 className="text-4xl md:text-5xl font-bold text-primary-navy mb-6">{post.title}</h1>
+            <p className="text-xl text-primary-navy/80">{post.excerpt}</p>
           </div>
         </div>
       </section>
-
-      {/* Content */}
-      <article className="section-padding bg-white">
+      <article className="section-padding bg-background-light">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto prose prose-lg">
-            <div className="whitespace-pre-line text-primary-dark/80 leading-relaxed">
-              {post.content}
-            </div>
+          <div className="max-w-3xl mx-auto prose prose-lg prose-headings:text-primary-navy prose-p:text-primary-navy/80 prose-strong:text-primary-navy whitespace-pre-line">
+            {content.trim()}
           </div>
         </div>
       </article>
-
-      {/* CTA Section */}
-      <section className="section-padding bg-background-light">
-        <div className="container-custom text-center">
-          <h2 className="text-3xl font-bold text-primary-dark mb-4">
-            Need Help Choosing Insurance?
-          </h2>
-          <p className="text-lg text-primary-dark/70 mb-8 max-w-2xl mx-auto">
-            Our insurance experts are here to help you find the right coverage
-          </p>
-          <Link href="/contact" className="btn-primary inline-flex items-center space-x-2">
-            <span>Get Free Consultation</span>
-            <ArrowLeft className="w-5 h-5 rotate-180" />
+      <section className="section-padding bg-white">
+        <div className="container-custom max-w-3xl">
+          <h2 className="text-2xl font-bold text-primary-navy mb-6">Related Posts</h2>
+          <ul className="space-y-4">
+            {blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3).map((p) => (
+              <li key={p.slug}>
+                <Link href={`/blog/${p.slug}`} className="text-primary-navy hover:text-accent-gold font-medium flex items-center gap-2">
+                  {p.title}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <section className="section-padding bg-primary-navy text-white text-center">
+        <div className="container-custom">
+          <h2 className="text-2xl font-bold mb-4">Need Help Choosing Insurance?</h2>
+          <p className="text-white/85 mb-8 max-w-xl mx-auto">Our advisors are here to help you find the right coverage.</p>
+          <Link href="/contact" className="btn-primary bg-accent-gold text-primary-navy inline-flex items-center gap-2">
+            Get Free Consultation
+            <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </section>

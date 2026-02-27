@@ -1,9 +1,11 @@
+import { SITE_NAME, SITE_DOMAIN } from "@/lib/site-config";
+
 export default function SchemaMarkup() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "InsuranceAgency",
-    name: "SPY Insurance Brokers Pvt. Ltd",
-    url: "https://spyinsurance.com",
+    name: SITE_NAME,
+    url: SITE_DOMAIN,
     logo: "https://spyinsurance.com/logo.png",
     description: "Leading insurance broker providing comprehensive corporate and retail insurance solutions.",
     address: {

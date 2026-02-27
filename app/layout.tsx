@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import SchemaMarkup from "@/components/SchemaMarkup";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -40,10 +41,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <SchemaMarkup />
       </head>
-      <body className="antialiased bg-background text-primary-dark">
+      <body className="antialiased bg-background text-primary-navy">
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

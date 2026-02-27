@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { NAV, CONTACT } from "@/lib/site-config";
@@ -33,8 +34,15 @@ export default function Navbar() {
     >
       <div className="container-custom px-4 md:px-8">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center hover:opacity-90 transition-opacity">
-            <span className="text-xl md:text-2xl font-bold text-primary-navy">SPY Insurance</span>
+          <Link href="/" className="flex items-center hover:opacity-90 transition-opacity shrink-0">
+            <Image
+              src="/logo.png"
+              alt="SPRY Insurance Brokers Pvt. Ltd."
+              width={200}
+              height={56}
+              className="h-12 w-auto md:h-14 object-contain object-left"
+              priority
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">

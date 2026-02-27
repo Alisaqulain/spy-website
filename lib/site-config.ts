@@ -1,4 +1,4 @@
-export const SITE_NAME = "SPY Insurance Brokers";
+export const SITE_NAME = "SPRY Insurance Brokers Pvt. Ltd.";
 export const SITE_DOMAIN = "https://spyinsurance.com";
 
 export const NAV = {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import { FOOTER_LINKS, CONTACT, SITE_NAME } from "@/lib/site-config";
 
@@ -17,7 +18,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-12">
           <div className="lg:col-span-2">
             <Link href="/" className="inline-block mb-6">
-              <span className="text-2xl font-bold text-white">{SITE_NAME}</span>
+              <Image
+                src="/logo.png"
+                alt={SITE_NAME}
+                width={220}
+                height={62}
+                className="h-14 w-auto object-contain object-left"
+              />
             </Link>
             <p className="text-white/80 mb-6 max-w-sm leading-relaxed">
               Your trusted partner in risk management and insurance broking. We deliver corporate and retail solutions with expertise, transparency, and excellence.

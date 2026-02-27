@@ -17,11 +17,17 @@ import {
   Car,
   Briefcase,
   ArrowRight,
+  Award,
+  MapPin,
+  Users,
+  Smile,
+  Shield,
+  Phone,
 } from "lucide-react";
 import HeroSlider from "@/components/HeroSlider";
 import SectionHeading from "@/components/SectionHeading";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import { NAV } from "@/lib/site-config";
+import { NAV, CONTACT } from "@/lib/site-config";
 
 const corporateServices = [
   {
@@ -79,10 +85,10 @@ const retailProducts = [
 ];
 
 const stats = [
-  { value: 20, suffix: "+", label: "Years of Expertise" },
-  { value: 18, label: "Offices in India" },
-  { value: 500, suffix: "+", label: "Team Strength" },
-  { value: 8000, suffix: "+", label: "Happy Customers" },
+  { value: 20, suffix: "+", label: "Years of Expertise", icon: Award },
+  { value: 18, label: "Offices in India", icon: MapPin },
+  { value: 500, suffix: "+", label: "Team Strength", icon: Users },
+  { value: 8000, suffix: "+", label: "Happy Customers", icon: Smile },
 ];
 
 const blogPreview = [
@@ -96,7 +102,37 @@ export default function HomeContent() {
     <>
       <HeroSlider />
 
-      {/* About Intro - subtle bg texture */}
+      {/* Trust strip – clean cards on light background */}
+      <section className="py-8 md:py-10 bg-white border-b border-primary-navy/5">
+        <div className="container-custom px-4 md:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {[
+              { icon: Shield, label: "IRDA Licensed Broker" },
+              { icon: Award, label: "20+ Years Experience" },
+              { icon: Smile, label: "8,000+ Clients Served" },
+              { icon: Users, label: "500+ Expert Advisors" },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 * i }}
+                  className="flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-background-light border border-primary-navy/5 hover:border-accent-gold/20 hover:shadow-soft transition-all"
+                >
+                  <div className="shrink-0 w-11 h-11 rounded-xl bg-accent-gold/15 flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-accent-gold" />
+                  </div>
+                  <span className="text-sm font-semibold text-primary-navy">{item.label}</span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* About Intro */}
       <section
         id="about-intro"
         className="section-padding relative overflow-hidden bg-white"
@@ -115,16 +151,20 @@ export default function HomeContent() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-navy mb-6">
+            <span className="inline-block text-accent-gold font-semibold text-sm uppercase tracking-wider mb-4">
+              Why SPRY
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-navy mb-6 leading-tight">
               Get the Right Guidance. Manage Your Insurable Risks.
             </h2>
-            <p className="text-lg text-primary-navy/80 leading-relaxed">
-              To manage and mitigate life&apos;s uncertainties, having the right insurance coverage is essential. 
-              We are in the business of making insurance decisions easier and more informed. With specialised 
-              solutions at optimised costs across verticals and industries, our team ensures you always have 
-              the right coverage.
+            <p className="text-lg md:text-xl text-primary-navy/80 leading-relaxed mb-8">
+              To manage and mitigate life&apos;s uncertainties, having the right insurance coverage is essential.
+              We make insurance decisions easier and more informed—with specialised solutions at optimised costs across verticals and industries.
             </p>
-            <Link href="/about" className="inline-flex items-center gap-2 text-accent-gold font-semibold mt-6 hover:underline">
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 rounded-2xl bg-primary-navy text-white px-6 py-3 font-semibold hover:bg-primary-navy/90 hover:shadow-lg transition-all"
+            >
               Explore Us
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -135,6 +175,9 @@ export default function HomeContent() {
       {/* Risk Management Services Grid */}
       <section id="risk-management" className="section-padding bg-background-light">
         <div className="container-custom">
+          <span className="block text-center text-accent-gold font-semibold text-sm uppercase tracking-wider mb-2">
+            What We Do
+          </span>
           <SectionHeading
             title="Risk Management Solutions For You"
             subtitle="Through independent risk assessment and advisory backed by knowledge and experience, we help you eliminate uncertainties and manage insurable risks."
@@ -166,10 +209,12 @@ export default function HomeContent() {
             })}
           </div>
           <div className="text-center mt-12">
-            <Link href="/corporate" className="btn-primary inline-flex items-center gap-2">
-              Explore More Solutions
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link href="/corporate" className="btn-primary inline-flex items-center gap-2 shadow-lg shadow-accent-gold/20">
+                Explore More Solutions
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -177,6 +222,9 @@ export default function HomeContent() {
       {/* Industry Solutions */}
       <section className="section-padding bg-white">
         <div className="container-custom">
+          <span className="block text-center text-accent-gold font-semibold text-sm uppercase tracking-wider mb-2">
+            Sector Expertise
+          </span>
           <SectionHeading
             title="Delivering Risk Management Solutions Across Industries"
             subtitle="With deep experience in the insurance sector, we help organisations manage business and commercial risks with best-in-class insurance programmes."
@@ -217,6 +265,9 @@ export default function HomeContent() {
       {/* Retail Solutions */}
       <section className="section-padding bg-background-light">
         <div className="container-custom">
+          <span className="block text-center text-accent-gold font-semibold text-sm uppercase tracking-wider mb-2">
+            For Individuals & Families
+          </span>
           <SectionHeading
             title="End-to-End Retail Insurance Guidance"
             subtitle="We are committed to helping everyone find the right coverage to be prepared for uncertainties. Our team offers a vast array of curated retail insurance solutions."
@@ -254,47 +305,76 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* Animated Stats - with background image */}
-      <section className="section-padding relative text-white overflow-hidden">
+      {/* Animated Stats – compact, no empty feel */}
+      <section className="relative text-white overflow-hidden py-14 md:py-20">
         <div
           className="absolute inset-0 bg-cover bg-center section-bg-image"
           style={{
             backgroundImage: "url(https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80)",
           }}
         />
-        <div className="absolute inset-0 bg-primary-navy/88" />
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "36px 36px" }} />
-        <div className="container-custom relative z-10">
-          <SectionHeading
-            variant="dark"
-            title="Our Expertise. Your Peace of Mind."
-            subtitle="We help our clients transform uncertainties into opportunities with carefully selected insurance coverage. Expert assistance anytime, anywhere."
-          />
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+        <div className="absolute inset-0 bg-primary-navy/90" />
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+        <div className="container-custom relative z-10 px-4 md:px-8">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
+            <div className="lg:col-span-2">
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
+                className="text-3xl md:text-4xl font-bold text-white mb-4"
               >
-                <div className="text-4xl md:text-5xl font-bold text-accent-gold mb-2">
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix || ""} />
-                </div>
-                <div className="text-lg font-medium text-white/90">{stat.label}</div>
+                Our Expertise. Your Peace of Mind.
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-white/90 mb-6 max-w-md"
+              >
+                We help our clients transform uncertainties into opportunities with carefully selected coverage. Expert assistance anytime, anywhere.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 }}
+              >
+                <Link href="/about" className="btn-outline inline-flex items-center gap-2 text-sm py-2.5 px-5">
+                  Explore More
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </motion.div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-              <Link href="/about" className="btn-outline inline-flex items-center gap-2">
-                Explore More
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </motion.div>
+            </div>
+            <div className="lg:col-span-3">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                {stats.map((stat, i) => {
+                  const Icon = stat.icon;
+                  return (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.05 * i }}
+                      whileHover={{ scale: 1.02 }}
+                      className="flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/15 transition-colors"
+                    >
+                      <div className="shrink-0 w-12 h-12 rounded-xl bg-accent-gold/25 flex items-center justify-center">
+                        <Icon className="w-6 h-6 text-accent-gold" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-2xl md:text-3xl font-bold text-accent-gold leading-tight">
+                          <AnimatedCounter value={stat.value} suffix={stat.suffix || ""} />
+                        </div>
+                        <div className="text-sm font-medium text-white/90 mt-0.5">{stat.label}</div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -324,6 +404,9 @@ export default function HomeContent() {
       {/* Blog Preview */}
       <section className="section-padding bg-background-light">
         <div className="container-custom">
+          <span className="block text-center text-accent-gold font-semibold text-sm uppercase tracking-wider mb-2">
+            Latest Insights
+          </span>
           <SectionHeading
             title="Blog"
             subtitle="Read the latest trends in the industry and stay informed."
@@ -364,7 +447,42 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* Career CTA - with background image */}
+      {/* Get Quote CTA strip */}
+      <section className="bg-primary-navy text-white py-12 md:py-14">
+        <div className="container-custom px-4 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row items-center justify-between gap-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-8 md:p-10"
+          >
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Ready to Get Covered?</h2>
+              <p className="text-white/85">Get a free quote or speak with an advisor today.</p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-accent-gold text-primary-navy px-6 py-3 font-semibold shadow-lg shadow-accent-gold/25 hover:bg-amber-500 transition-colors"
+                >
+                  Get Free Quote
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
+              <a
+                href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
+                className="inline-flex items-center gap-2 rounded-2xl border-2 border-white/50 text-white px-6 py-3 font-semibold hover:bg-white/10 transition-colors"
+              >
+                <Phone className="w-5 h-5" />
+                Call Us
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Career CTA */}
       <section className="section-padding relative text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center section-bg-image"
@@ -381,6 +499,9 @@ export default function HomeContent() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
+            <span className="inline-block text-accent-gold font-semibold text-sm uppercase tracking-wider mb-3">
+              We&apos;re Hiring
+            </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Find Career Opportunities With Us</h2>
             <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8">
               Join our team and help shape the future of insurance broking and risk management.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import AnnouncementPopup from "@/components/AnnouncementPopup";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import SchemaMarkup from "@/components/SchemaMarkup";
@@ -43,7 +44,10 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-background text-primary-navy">
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <div className="pt-20 md:pt-24">
+          <main className="min-h-screen">{children}</main>
+        </div>
+        <AnnouncementPopup />
         <Footer />
         <ScrollToTop />
       </body>

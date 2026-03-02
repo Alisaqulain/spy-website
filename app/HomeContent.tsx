@@ -27,6 +27,7 @@ import {
 import HeroSlider from "@/components/HeroSlider";
 import SectionHeading from "@/components/SectionHeading";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import TestimonialSlider from "@/components/TestimonialSlider";
 import { NAV, CONTACT } from "@/lib/site-config";
 
 const corporateServices = [
@@ -378,6 +379,9 @@ export default function HomeContent() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <TestimonialSlider />
 
       {/* Partners */}
       <section className="section-padding bg-white">

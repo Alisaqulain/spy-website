@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 
 interface Testimonial {
   id: number;
@@ -19,7 +20,7 @@ const testimonials: Testimonial[] = [
     name: "Rajesh Kumar",
     role: "CEO",
     company: "TechCorp Industries",
-    content: "SPY Insurance has been our trusted partner for over 5 years. Their expertise in corporate insurance solutions has helped us manage risks effectively and save significantly on premiums.",
+    content: "SPRY has been our trusted partner for over five years. Their expertise in corporate insurance has helped us manage risks effectively and save significantly on premiums. Highly professional team.",
     rating: 5,
   },
   {
@@ -27,7 +28,7 @@ const testimonials: Testimonial[] = [
     name: "Priya Sharma",
     role: "HR Director",
     company: "Global Services Ltd",
-    content: "The employee benefits program designed by SPY Insurance has been exceptional. Our employees are happy, and the claims process is seamless. Highly recommended!",
+    content: "The employee benefits programme designed by SPRY has been exceptional. Our employees are happy, and the claims process is seamless. We recommend them to every business we know.",
     rating: 5,
   },
   {
@@ -35,7 +36,7 @@ const testimonials: Testimonial[] = [
     name: "Amit Patel",
     role: "Business Owner",
     company: "Patel Enterprises",
-    content: "As a small business owner, finding the right insurance was overwhelming. SPY Insurance made it simple and affordable. Their team is professional and always available.",
+    content: "As a small business owner, finding the right insurance was overwhelming. SPRY made it simple and affordable. Their team is professional, responsive, and always available when we need them.",
     rating: 5,
   },
   {
@@ -43,7 +44,15 @@ const testimonials: Testimonial[] = [
     name: "Sneha Reddy",
     role: "Finance Manager",
     company: "Manufacturing Co.",
-    content: "Their risk assessment and advisory services are top-notch. We've avoided potential losses thanks to their proactive approach. SPY Insurance truly understands our business needs.",
+    content: "Their risk assessment and advisory services are top-notch. We have avoided potential losses thanks to their proactive approach. SPRY truly understands our business and industry needs.",
+    rating: 5,
+  },
+  {
+    id: 5,
+    name: "Vikram Singh",
+    role: "COO",
+    company: "Infrastructure Solutions",
+    content: "From placement to claims, SPRY delivers end-to-end. Their lenders insurance advisory helped us meet our financiers' requirements smoothly. A reliable partner for any corporate.",
     rating: 5,
   },
 ];
@@ -56,14 +65,13 @@ export default function TestimonialSlider() {
     const timer = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
+      x: direction > 0 ? 80 : -80,
       opacity: 0,
     }),
     center: {
@@ -73,7 +81,7 @@ export default function TestimonialSlider() {
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 300 : -300,
+      x: direction < 0 ? 80 : -80,
       opacity: 0,
     }),
   };
@@ -93,25 +101,21 @@ export default function TestimonialSlider() {
     setCurrentIndex(index);
   };
 
-  return (
-    <section className="section-padding bg-background-light">
-      <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-4">
-            What Our Clients Say
-          </h2>
-          <p className="text-lg text-primary-dark/70 max-w-2xl mx-auto">
-            Trusted by businesses and individuals across India
-          </p>
-        </motion.div>
+  const t = testimonials[currentIndex];
 
-        <div className="relative max-w-4xl mx-auto">
-          <AnimatePresence initial={false} custom={direction}>
+  return (
+    <section className="section-padding bg-white">
+      <div className="container-custom">
+        <span className="block text-center text-accent-gold font-semibold text-sm uppercase tracking-wider mb-2">
+          Testimonials
+        </span>
+        <SectionHeading
+          title="What Our Clients Say"
+          subtitle="Trusted by businesses and individuals across India. Here’s what they have to say about working with us."
+        />
+
+        <div className="relative max-w-4xl mx-auto px-4 md:px-12">
+          <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
               custom={direction}
@@ -119,55 +123,51 @@ export default function TestimonialSlider() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.4 }}
-              className="card text-center"
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="rounded-2xl bg-background-light border border-primary-navy/5 p-8 md:p-10 text-center shadow-soft"
             >
-              <Quote className="w-12 h-12 text-accent-green mx-auto mb-6" />
-              <div className="flex justify-center mb-4">
-                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
+              <div className="w-14 h-14 rounded-2xl bg-accent-gold/15 flex items-center justify-center mx-auto mb-6">
+                <Quote className="w-7 h-7 text-accent-gold" />
+              </div>
+              <div className="flex justify-center gap-1 mb-6">
+                {[...Array(t.rating)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-accent-gold text-accent-gold" />
                 ))}
               </div>
-              <p className="text-lg text-primary-dark/80 mb-6 italic">
-                "{testimonials[currentIndex].content}"
-              </p>
+              <blockquote className="text-lg md:text-xl text-primary-navy/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+                &ldquo;{t.content}&rdquo;
+              </blockquote>
               <div>
-                <p className="font-semibold text-primary-dark">
-                  {testimonials[currentIndex].name}
-                </p>
-                <p className="text-primary-dark/70">
-                  {testimonials[currentIndex].role}, {testimonials[currentIndex].company}
+                <p className="font-bold text-primary-navy">{t.name}</p>
+                <p className="text-primary-navy/70 text-sm mt-1">
+                  {t.role}, {t.company}
                 </p>
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-accent-green hover:text-white transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 md:-translate-x-2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border-2 border-primary-navy/10 shadow-card flex items-center justify-center hover:border-accent-gold hover:text-accent-gold transition-colors touch-manipulation"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-accent-green hover:text-white transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 md:translate-x-2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border-2 border-primary-navy/10 shadow-card flex items-center justify-center hover:border-accent-gold hover:text-accent-gold transition-colors touch-manipulation"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          {/* Dots Indicator */}
-          <div className="flex justify-center space-x-2 mt-8">
+          <div className="flex justify-center gap-2 mt-8">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentIndex
-                    ? "bg-accent-green w-8"
-                    : "bg-primary-dark/30"
+                className={`h-2 rounded-full transition-all duration-300 touch-manipulation ${
+                  index === currentIndex ? "bg-accent-gold w-8" : "bg-primary-navy/20 w-2 hover:bg-primary-navy/40"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

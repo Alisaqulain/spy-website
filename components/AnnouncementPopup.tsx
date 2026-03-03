@@ -33,14 +33,17 @@ export default function AnnouncementPopup() {
   return (
     <AnimatePresence>
       {visible && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[100] bg-primary-navy/60 backdrop-blur-sm"
-            onClick={handleClose}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+          onClick={handleClose}
+          aria-hidden
+        >
+          <div
+            className="absolute inset-0 bg-primary-navy/60 backdrop-blur-sm"
             aria-hidden
           />
           <motion.div
@@ -48,7 +51,7 @@ export default function AnnouncementPopup() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed z-[101] top-1/2 -translate-y-1/2 max-h-[85vh] md:max-h-[90vh] flex flex-col rounded-2xl md:rounded-3xl bg-white shadow-2xl overflow-hidden left-[max(1rem,env(safe-area-inset-left))] right-[max(1rem,env(safe-area-inset-right))] md:left-1/2 md:right-auto md:w-full md:max-w-md md:-translate-x-1/2"
+            className="relative z-10 w-full max-w-md max-h-[85vh] md:max-h-[90vh] flex flex-col rounded-2xl md:rounded-3xl bg-white shadow-2xl overflow-hidden mx-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="overflow-y-auto overscroll-contain flex-1 min-h-0 p-5 pb-6 md:p-8">
@@ -91,7 +94,7 @@ export default function AnnouncementPopup() {
               </label>
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );

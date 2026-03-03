@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
-import { FOOTER_LINKS, CONTACT, SITE_NAME } from "@/lib/site-config";
+import { FOOTER_LINKS, CONTACT, SITE_NAME, SOCIAL } from "@/lib/site-config";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -9,7 +9,7 @@ export default function Footer() {
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Instagram, href: SOCIAL.instagram, label: "Instagram" },
   ];
 
   return (

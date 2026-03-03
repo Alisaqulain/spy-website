@@ -119,7 +119,7 @@ export default function RetailPage() {
         <div className="container-custom">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">Get Your Personalised Quote</h2>
           <p className="text-white/85 mb-8 max-w-xl mx-auto">Tell us what you need—we’ll find the right coverage.</p>
-          <Link href="/contact" className="btn-primary bg-accent-gold text-primary-navy inline-flex items-center gap-2">
+          <Link href="/contact" className="btn-primary bg-accent-gold text-primary-navy inline-flex items-center gap-2 whitespace-nowrap">
             Get Quote
             <ArrowRight className="w-5 h-5" />
           </Link>

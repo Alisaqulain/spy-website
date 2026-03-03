@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Calendar, Tag } from "lucide-react";
 import PageHero from "@/components/PageHero";
-import { blogPosts, getPostBySlug } from "@/lib/blog-data";
+import { getBlogPosts } from "@/lib/data-store";
 
 const postContent: Record<string, string> = {
   "corporate-risk-transfer": `
@@ -67,13 +67,10 @@ We offer single-trip and multi-trip plans from leading insurers. Share your trav
   `,
 };
 
-export async function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
-}
-
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
-  if (!post) return { title: "Blog | SPY Insurance Brokers" };
+  const posts = getBlogPosts();
+  const post = posts.find((p) => p.slug === params.slug);
+  if (!post) return { title: "Blog | SPRY Insurance Brokers" };
   return {
     title: `${post.title} | Blog`,
     description: post.excerpt,
@@ -81,10 +78,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+  const posts = getBlogPosts();
+  const post = posts.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
   const content = postContent[post.slug] || post.excerpt;
+
+  const relatedPosts = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <>
@@ -121,7 +121,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="container-custom max-w-3xl">
           <h2 className="text-2xl font-bold text-primary-navy mb-6">Related Posts</h2>
           <ul className="space-y-4">
-            {blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3).map((p) => (
+            {relatedPosts.map((p) => (
               <li key={p.slug}>
                 <Link href={`/blog/${p.slug}`} className="text-primary-navy hover:text-accent-gold font-medium flex items-center gap-2">
                   {p.title}

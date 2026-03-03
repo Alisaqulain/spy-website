@@ -1,13 +1,24 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
-import { blogPosts } from "@/lib/blog-data";
+import { blogPosts as defaultBlogPosts } from "@/lib/blog-data";
+import type { BlogPost } from "@/lib/blog-data";
 
 export default function BlogPage() {
+  const [posts, setPosts] = useState<BlogPost[]>(defaultBlogPosts);
+
+  useEffect(() => {
+    fetch("/api/blog")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data) => Array.isArray(data) && data.length > 0 && setPosts(data))
+      .catch(() => {});
+  }, []);
+
   return (
     <>
       <PageHero
@@ -24,7 +35,7 @@ export default function BlogPage() {
             subtitle="Read about industry trends, best practices, and practical guidance."
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, i) => (
+            {posts.map((post, i) => (
               <motion.article
                 key={post.slug}
                 initial={{ opacity: 0, y: 20 }}
@@ -33,7 +44,10 @@ export default function BlogPage() {
                 transition={{ delay: i * 0.05 }}
               >
                 <Link href={`/blog/${post.slug}`} className="card block h-full group">
-                  <div className="w-full h-48 bg-gradient-to-br from-primary-navy/10 to-accent-gold/10 rounded-xl mb-4" />
+                  <div
+                    className="w-full h-48 rounded-xl mb-4 bg-cover bg-center"
+                    style={post.image ? { backgroundImage: `url(${post.image})` } : { background: "linear-gradient(to bottom right, rgba(11,31,58,0.1), rgba(212,175,55,0.1))" }}
+                  />
                   <span className="text-sm text-accent-gold font-medium">{post.category}</span>
                   <h3 className="text-xl font-bold text-primary-navy mt-2 mb-2 group-hover:text-accent-gold transition-colors line-clamp-2">
                     {post.title}

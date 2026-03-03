@@ -381,7 +381,15 @@ export default function HomeContent() {
       </section>
 
       {/* Testimonials */}
-      <TestimonialSlider />
+      <section className="bg-white">
+        <TestimonialSlider />
+        <div className="container-custom pb-12 text-center">
+          <Link href="/testimonials" className="btn-secondary inline-flex items-center gap-2">
+            View All Testimonials
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
+      </section>
 
       {/* Partners */}
       <section className="section-padding bg-white">
@@ -468,7 +476,7 @@ export default function HomeContent() {
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-accent-gold text-primary-navy px-6 py-3 font-semibold shadow-lg shadow-accent-gold/25 hover:bg-amber-500 transition-colors"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-accent-gold text-primary-navy px-6 py-3 font-semibold shadow-lg shadow-accent-gold/25 hover:bg-amber-500 transition-colors whitespace-nowrap"
                 >
                   Get Free Quote
                   <ArrowRight className="w-5 h-5" />

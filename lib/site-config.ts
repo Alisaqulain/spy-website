@@ -38,10 +38,16 @@ export const NAV = {
     ],
   },
   about: { label: "About Us", href: "/about" },
+  testimonials: { label: "Testimonials", href: "/testimonials" },
   caseStudies: { label: "Case Studies", href: "/case-studies" },
   careers: { label: "Careers", href: "/careers" },
   blog: { label: "Blog", href: "/blog" },
   contact: { label: "Contact", href: "/contact" },
+};
+
+export const SOCIAL = {
+  instagram: "https://www.instagram.com/spry_insures/reels/",
+  instagramProfile: "https://www.instagram.com/spry_insures/",
 };
 
 export const FOOTER_LINKS = {
@@ -73,6 +79,7 @@ export const FOOTER_LINKS = {
   ],
   company: [
     { label: "About Us", href: "/about" },
+    { label: "Testimonials", href: "/testimonials" },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Careers", href: "/careers" },
     { label: "Blog", href: "/blog" },

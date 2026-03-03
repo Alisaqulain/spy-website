@@ -97,6 +97,9 @@ export default function Navbar() {
             <Link href={NAV.caseStudies.href} className="px-4 py-3 text-primary-navy font-medium hover:text-accent-gold transition-colors rounded-2xl">
               {NAV.caseStudies.label}
             </Link>
+            <Link href={NAV.testimonials.href} className="px-4 py-3 text-primary-navy font-medium hover:text-accent-gold transition-colors rounded-2xl">
+              {NAV.testimonials.label}
+            </Link>
             <Link href={NAV.careers.href} className="px-4 py-3 text-primary-navy font-medium hover:text-accent-gold transition-colors rounded-2xl">
               {NAV.careers.label}
             </Link>
@@ -109,11 +112,11 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
-            <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-primary-navy hover:text-accent-gold transition-colors text-sm font-medium">
-              <Phone className="w-4 h-4" />
+            <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-primary-navy hover:text-accent-gold transition-colors text-sm font-medium whitespace-nowrap">
+              <Phone className="w-4 h-4 shrink-0" />
               {CONTACT.phone}
             </a>
-            <Link href="/contact" className="btn-primary">Get Quote</Link>
+            <Link href="/contact" className="btn-primary whitespace-nowrap">Get Quote</Link>
           </div>
 
           <button
@@ -153,13 +156,14 @@ export default function Navbar() {
                 ))}
                 <Link href={NAV.about.href} className="block py-2 font-medium text-primary-navy" onClick={() => setMobileOpen(false)}>{NAV.about.label}</Link>
                 <Link href={NAV.caseStudies.href} className="block py-2 font-medium text-primary-navy" onClick={() => setMobileOpen(false)}>{NAV.caseStudies.label}</Link>
+                <Link href={NAV.testimonials.href} className="block py-2 font-medium text-primary-navy" onClick={() => setMobileOpen(false)}>{NAV.testimonials.label}</Link>
                 <Link href={NAV.careers.href} className="block py-2 font-medium text-primary-navy" onClick={() => setMobileOpen(false)}>{NAV.careers.label}</Link>
                 <Link href={NAV.blog.href} className="block py-2 font-medium text-primary-navy" onClick={() => setMobileOpen(false)}>{NAV.blog.label}</Link>
                 <Link href={NAV.contact.href} className="block py-2 font-medium text-primary-navy" onClick={() => setMobileOpen(false)}>{NAV.contact.label}</Link>
               </div>
               <div className="mt-4 pt-4 border-t border-primary-navy/10 flex flex-col gap-3">
-                <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-primary-navy">{CONTACT.phone}</a>
-                <Link href="/contact" className="btn-primary text-center" onClick={() => setMobileOpen(false)}>Get Quote</Link>
+                <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-primary-navy whitespace-nowrap">{CONTACT.phone}</a>
+                <Link href="/contact" className="btn-primary text-center whitespace-nowrap" onClick={() => setMobileOpen(false)}>Get Quote</Link>
               </div>
             </motion.div>
           )}

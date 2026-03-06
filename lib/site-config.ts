@@ -94,8 +94,12 @@ export const FOOTER_LINKS = {
 };
 
 export const CONTACT = {
-  phone: "+91 123 456 7890",
+  phone: "+91 99030 61139",
   email: "info@spyinsurance.com",
-  address: "123 Business District, New Delhi - 110001, India",
-  whatsapp: "https://wa.me/911234567890",
+  address: "Everest House, 14th Floor, Room No - 14C, 46C Chowringhee Road, Kolkata - 700071",
+  whatsapp: "https://wa.me/919903061139",
+  /** Google Maps embed iframe src for /contact page */
+  mapEmbedUrl: "https://www.google.com/maps?q=Everest+House,+14th+Floor,+46C+Chowringhee+Road,+Kolkata+700071&output=embed",
+  /** Open in Google Maps (new tab) */
+  mapLink: "https://www.google.com/maps/search/?api=1&query=Everest+House+46C+Chowringhee+Road+Kolkata+700071",
 };

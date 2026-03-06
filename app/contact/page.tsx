@@ -160,10 +160,34 @@ export default function ContactPage() {
       </section>
       <section className="section-padding bg-background-light">
         <div className="container-custom">
-          <h2 className="text-2xl font-bold text-primary-navy mb-6">Find Us</h2>
-          <div className="w-full h-80 bg-primary-navy/10 rounded-2xl flex items-center justify-center text-primary-navy/50">
-            Map placeholder – integrate Google Maps or your preferred map provider here.
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <h2 className="text-2xl font-bold text-primary-navy">Find Us</h2>
+            <a
+              href={CONTACT.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-accent-gold font-medium hover:underline"
+            >
+              <MapPin className="w-5 h-5" />
+              Open in Google Maps
+            </a>
           </div>
+          <div className="w-full h-80 md:h-96 rounded-2xl overflow-hidden border border-primary-navy/10 shadow-soft">
+            <iframe
+              src={CONTACT.mapEmbedUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Office location - Everest House, 46C Chowringhee Road, Kolkata"
+              className="w-full h-full min-h-[320px]"
+            />
+          </div>
+          <p className="mt-4 text-primary-navy/70 text-sm">
+            {CONTACT.address}
+          </p>
         </div>
       </section>
       <a
